@@ -1,7 +1,8 @@
 import CustomInput from "../components/CustomInput";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export interface FormProps {
+  empID: string;
   firstName: string;
   lastName: string;
   yoe: string;
@@ -12,15 +13,24 @@ export interface FormProps {
 
 interface ChildProps {
   setDetails: React.Dispatch<React.SetStateAction<FormProps[]>>;
+  editData: FormProps | undefined;
+  editAction: boolean;
 }
-const EmployeeFrom = ({ setDetails }: ChildProps) => {
+const EmployeeFrom = ({ setDetails, editData, editAction }: ChildProps) => {
   const [formData, setFormData] = useState<FormProps>({
+    empID: "",
     firstName: "",
     lastName: "",
     yoe: "",
     age: "",
     location: "",
   });
+
+  useEffect(() => {
+    if (editData && editAction) {
+      setFormData(editData);
+    }
+  }, [editData, editAction]);
 
   const handlFormData = (name: string, value: string) => {
     setFormData((preData) => ({
@@ -31,8 +41,18 @@ const EmployeeFrom = ({ setDetails }: ChildProps) => {
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    setDetails((prevData: FormProps[]) => [...prevData, formData]);
+    if (editAction) {
+      setDetails((prevData: FormProps[]) =>
+        prevData.map((data) =>
+          data.empID === formData.empID ? formData : data
+        )
+      );
+    } else {
+      formData.empID &&
+        setDetails((prevData: FormProps[]) => [...prevData, formData]);
+    }
     setFormData({
+      empID: "",
       firstName: "",
       lastName: "",
       yoe: "",
@@ -47,8 +67,10 @@ const EmployeeFrom = ({ setDetails }: ChildProps) => {
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
+        border: "1px solid",
       }}
     >
+      <h4 style={{ padding: "8px" }}>Employee Registration</h4>
       <CustomInput
         name={"firstName"}
         label="First Name"
@@ -64,18 +86,26 @@ const EmployeeFrom = ({ setDetails }: ChildProps) => {
         type={"text"}
       />
       <CustomInput
+        name={"empID"}
+        label="Employee ID"
+        value={formData.empID}
+        onChange={handlFormData}
+        type={"text"}
+        disabled={editAction as boolean}
+      />
+      <CustomInput
         name={"yoe"}
         label="YOE"
         value={formData.yoe}
         onChange={handlFormData}
-        type={"text"}
+        type={"number"}
       />
       <CustomInput
         name={"age"}
         label="Age"
         value={formData.age}
         onChange={handlFormData}
-        type={"text"}
+        type={"number"}
       />
       <CustomInput
         name={"location"}
@@ -84,7 +114,12 @@ const EmployeeFrom = ({ setDetails }: ChildProps) => {
         onChange={handlFormData}
         type={"text"}
       />
-      <button onClick={handleSubmit}>Submit</button>
+      <button
+        onClick={handleSubmit}
+        style={{ backgroundColor: "blue", padding: "8px", marginBottom: "8px" }}
+      >
+        Submit
+      </button>
     </div>
   );
 };

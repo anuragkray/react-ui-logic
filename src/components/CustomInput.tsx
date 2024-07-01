@@ -4,6 +4,7 @@ interface CustomInputProps {
   type: string;
   value: string;
   onChange: (name: string, value: string) => void;
+  disabled?: boolean;
 }
 const CustomInput = ({
   name,
@@ -11,16 +12,34 @@ const CustomInput = ({
   onChange,
   type,
   label,
+  disabled = false,
 }: CustomInputProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     onChange(name, value);
   };
   return (
-    <>
-      <label htmlFor={name}>{label}</label>
-      <input name={name} type={type} value={value} onChange={handleChange} />
-    </>
+    <div
+      style={{
+        display: "flex",
+        margin: "12px",
+        flexBasis: "50%",
+        flexDirection: "column",
+      }}
+    >
+      <div>
+        <label htmlFor={name}>{label}</label>
+      </div>
+      <div>
+        <input
+          name={name}
+          type={type}
+          value={value}
+          onChange={handleChange}
+          disabled={disabled}
+        />
+      </div>
+    </div>
   );
 };
 export default CustomInput;
