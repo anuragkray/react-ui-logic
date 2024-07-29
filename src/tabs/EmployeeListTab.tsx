@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import CustomSearch from "../components/CustomSearch";
-import { FormProps } from "./EmployeeForm";
+import { FormProps } from "./EmployeeFormTab";
 
 interface ChildProps {
   empDetails: FormProps[];

@@ -1,4 +1,4 @@
-import { FormProps } from "./EmployeeForm";
+import { FormProps } from "./EmployeeFormTab";
 import { useMemo, useState } from "react";
 interface EmployeeDetailsProps {
   viewData?: FormProps;

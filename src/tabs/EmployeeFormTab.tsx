@@ -17,7 +17,7 @@ interface ChildProps {
   editData: FormProps | undefined;
   editAction: boolean;
 }
-const EmployeeFrom = ({ setDetails, editData, editAction }: ChildProps) => {
+const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
   const [formData, setFormData] = useState<FormProps>({
     empID: "",
     firstName: "",
@@ -162,4 +162,4 @@ const EmployeeFrom = ({ setDetails, editData, editAction }: ChildProps) => {
   );
 };
 
-export default EmployeeFrom;
+export default EmployeeForm;
