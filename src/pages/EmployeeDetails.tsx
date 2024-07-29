@@ -1,16 +1,37 @@
 import { FormProps } from "./EmployeeForm";
-
+import { useMemo, useState } from "react";
 interface EmployeeDetailsProps {
   viewData?: FormProps;
   handleDelete: (ID: string) => void;
   handleEditButton: () => void;
 }
+
+const nameWithSkill = [
+  {
+    value: "fntnd",
+    steam: "FNTND",
+    skill: ["React Js", "Javascript", "Vue JS"],
+  },
+  { value: "bknd", steam: "BKND", skill: ["Java", "Python", "Golang"] },
+  { value: "dtbs", steam: "DTBS", skill: ["Sql", "Mono DB", "Maria DB"] },
+];
 const EmployeeDetails = ({
   viewData,
   handleDelete,
   handleEditButton,
 }: EmployeeDetailsProps) => {
-  console.log("Props", viewData);
+  const [stream, setStream] = useState("");
+
+  const skillList = useMemo(() => {
+    const skillData = nameWithSkill.find((element) => element.value === stream);
+
+    return skillData?.skill ? skillData?.skill : [];
+  }, [stream]);
+
+  const handleStream = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    const { value } = event.target;
+    setStream(value);
+  };
   return (
     <div
       style={{
@@ -19,25 +40,110 @@ const EmployeeDetails = ({
         height: "50%",
       }}
     >
-      <h6 style={{ padding: "8px" }}>Employee Details</h6>
+      <table style={{ border: "1px solid black", borderCollapse: "collapse" }}>
+        <tr>
+          <th
+            colSpan={5}
+            style={{ border: "1px solid black", borderCollapse: "collapse" }}
+          >
+            Employee Details
+          </th>
+        </tr>
+        <tr>
+          <th style={{ border: "1px solid black", borderCollapse: "collapse" }}>
+            Emp ID
+          </th>
+          <th style={{ border: "1px solid black", borderCollapse: "collapse" }}>
+            First Name
+          </th>
+          <th style={{ border: "1px solid black", borderCollapse: "collapse" }}>
+            Last Name
+          </th>
+          <th style={{ border: "1px solid black", borderCollapse: "collapse" }}>
+            YOE
+          </th>
+          <th style={{ border: "1px solid black", borderCollapse: "collapse" }}>
+            Location
+          </th>
+        </tr>
+        <tbody>
+          <tr>
+            <td
+              style={{
+                border: "1px solid black",
+                borderCollapse: "collapse",
+                textAlign: "center",
+              }}
+            >
+              {viewData?.empID}
+            </td>
+            <td
+              style={{
+                border: "1px solid black",
+                borderCollapse: "collapse",
+                textAlign: "center",
+              }}
+            >
+              {viewData?.firstName}
+            </td>
+            <td
+              style={{
+                border: "1px solid black",
+                borderCollapse: "collapse",
+                textAlign: "center",
+              }}
+            >
+              {viewData?.lastName}
+            </td>
+            <td
+              style={{
+                border: "1px solid black",
+                borderCollapse: "collapse",
+                textAlign: "center",
+              }}
+            >
+              {viewData?.yoe}
+            </td>
+            <td
+              style={{
+                border: "1px solid black",
+                borderCollapse: "collapse",
+                textAlign: "center",
+              }}
+            >
+              {viewData?.location}
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <div>
-        <span>ID: {viewData?.empID}</span>
-        <br></br>
-        <span>First Name: {viewData?.firstName}</span>
-        <br></br>
-        <span>Last Name: {viewData?.lastName}</span>
-        <br></br>
-        <span>YOE: {viewData?.yoe}</span>
-        <br></br>
-        <span>Location: {viewData?.location}</span>
-        <br></br>
         <button
-          style={{ margin: "8px" }}
+          style={{ marginLeft: "40%", marginRight: "8px", marginTop: "2%" }}
           onClick={() => handleDelete(viewData?.empID as string)}
         >
           Delete
         </button>
         <button onClick={handleEditButton}>Edit</button>
+      </div>
+      <div style={{ marginTop: "24Px" }}>
+        <label>Stream</label>
+        <select onChange={handleStream}>
+          <option>Select Stream..</option>
+          {nameWithSkill.map((element) => (
+            <option key={element.value} value={element.value}>
+              {element.steam}
+            </option>
+          ))}
+        </select>
+        <label>Skills</label>
+        <select>
+          <option>Select Skills..</option>
+          {skillList.map((element) => (
+            <option key={element} value={element}>
+              {element}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ export interface FormProps {
   empID: string;
   firstName: string;
   lastName: string;
+  secNum: string;
   yoe: string;
   age: string;
   location: string;
@@ -21,6 +22,7 @@ const EmployeeFrom = ({ setDetails, editData, editAction }: ChildProps) => {
     empID: "",
     firstName: "",
     lastName: "",
+    secNum: "",
     yoe: "",
     age: "",
     location: "",
@@ -55,6 +57,7 @@ const EmployeeFrom = ({ setDetails, editData, editAction }: ChildProps) => {
       empID: "",
       firstName: "",
       lastName: "",
+      secNum: "",
       yoe: "",
       age: "",
       location: "",
@@ -85,6 +88,41 @@ const EmployeeFrom = ({ setDetails, editData, editAction }: ChildProps) => {
         onChange={handlFormData}
         type={"text"}
       />
+      <div style={{ position: "relative", width: "250px" }}>
+        <label style={{ marginLeft: "14px" }}>Secret number</label>
+        <input
+          name={"secNum"}
+          value={formData.secNum}
+          onChange={(event) =>
+            handlFormData(event.target.name, event.target.value)
+          }
+          style={{
+            width: "70%",
+            boxSizing: "border-box",
+            border: "1px solid #ccc",
+            height: "20px",
+            fontSize: "14px",
+            padding: " 5px 20px",
+            marginLeft: "14px",
+          }}
+          type={"text"}
+        />
+        <button
+          style={{
+            position: "absolute",
+            top: "70%",
+            right: "1px" /* Adjust position as needed */,
+            transform: "translateY(-50%)",
+            backgroundColor: " #fff",
+            border: "none",
+            cursor: "pointer",
+            padding: " 5px 10px",
+            fontSize: "12px",
+          }}
+        >
+          {editAction ? "show" : "hide"}
+        </button>
+      </div>
       <CustomInput
         name={"empID"}
         label="Employee ID"
@@ -95,7 +133,7 @@ const EmployeeFrom = ({ setDetails, editData, editAction }: ChildProps) => {
       />
       <CustomInput
         name={"yoe"}
-        label="YOE"
+        label="Year of experience"
         value={formData.yoe}
         onChange={handlFormData}
         type={"number"}
