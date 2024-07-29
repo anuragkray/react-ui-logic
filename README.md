@@ -17,4 +17,4 @@
 Mainy in user interface development we use this type of functionality. We will not cover component development
 like button, input, text-input, accordian etc...
 
-**Note **: This is for understanding purpose so we will not use not state any mangement library llike redux toolkit or react thing context API
+**Note:** This is for understanding purpose so we will not use not state any mangement library llike redux toolkit or react thing context API
