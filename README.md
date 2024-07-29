@@ -1,5 +1,5 @@
-# React + TypeScript + Vite
---------------------------------
+## React + TypeScript + Vite
+------------------------------------------------------------------------------------------------------------------------------------------------
 **Topic : We re trying to develop the functionality that is use do display on user interface.**
 
 **UI Functionality**
@@ -14,6 +14,7 @@
 9. Dependent Dropdown
 10.  Flex - Grid
 11.  Table view
+    --------------------------------------------------------------------------------------------------------------------------------------------
 Mainy in user interface development we use this type of functionality. We will not cover component development
 like button, input, text-input, accordian etc...
 
