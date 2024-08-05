@@ -1,6 +1,6 @@
 .select-container{
     display: flex;
-    margin: 4px;
+    margin: 2px;
     flex-direction: row;
     column-gap: 2rem;
     flex-wrap: wrap;

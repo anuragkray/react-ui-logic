@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import CustomSearch from "../components/CustomSearch";
+import CustomSearch from "../components/custom-search/CustomSearch";
 import { FormProps } from "./EmployeeFormTab";
 
 interface ChildProps {

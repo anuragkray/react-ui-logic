@@ -2,7 +2,7 @@ import { useState, useTransition } from "react";
 import EmployeeForm, { FormProps } from "./tabs/EmployeeFormTab";
 import EmployeeList from "./tabs/EmployeeListTab";
 import EmployeeDetails from "./tabs/EmpDetailTab";
-import TabButton from "./components/TabButton";
+import TabButton from "./components/custom-tab/TabButton";
 import "./AppContainer.css";
 
 const AppContainer = () => {

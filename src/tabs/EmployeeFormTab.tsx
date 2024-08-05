@@ -1,15 +1,16 @@
-import CustomInput from "../components/CustomInput";
+import CustomInput from "../components/custom-input/CustomInput";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import CustomSelect from "../components/CustomSelect";
+import CustomSelect from "../components/custom-select/CustomSelect";
 import "./EmployeeFormTab.css";
 import { EMP_SKILL } from "../mock-api/data";
+import RadioButtonGroup from "../components/custom-radio-button/RadioButtonGroup";
 
 export interface FormProps {
   empID: string;
   firstName: string;
   lastName: string;
   email: string;
-  secNum: string;
+  phNum: string;
   yoe: string;
   age: string;
   location: string;
@@ -30,7 +31,7 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
     firstName: "",
     lastName: "",
     email: "",
-    secNum: "",
+    phNum: "",
     yoe: "",
     age: "",
     location: "",
@@ -96,7 +97,7 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
       firstName: "",
       lastName: "",
       email: "",
-      secNum: "",
+      phNum: "",
       yoe: "",
       age: "",
       location: "",
@@ -131,9 +132,9 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
         type={"email"}
       />
       <CustomInput
-        name={"secNum"}
-        label="Secret number"
-        value={formData.secNum}
+        name={"phNum"}
+        label="Phone no"
+        value={formData.phNum}
         onChange={handlFormData}
         type={"number"}
       />
@@ -145,9 +146,17 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
         type={"text"}
         disabled={editAction as boolean}
       />
+      <RadioButtonGroup
+        className="gender-radio"
+        name="gender"
+        options={[
+          { label: "Male", value: "m" },
+          { label: "Female", value: "f" },
+        ]}
+      />
       <CustomInput
         name={"yoe"}
-        label="Year of experience"
+        label="Year of exp"
         value={formData.yoe}
         onChange={handlFormData}
         type={"number"}
@@ -190,6 +199,7 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
         onChange={handlFormData}
         list={functionalityList}
       />
+
       <button
         onClick={handleSubmit}
         style={{ backgroundColor: "blue", padding: "8px", marginBottom: "8px" }}

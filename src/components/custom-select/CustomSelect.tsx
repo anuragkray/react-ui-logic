@@ -16,9 +16,9 @@ const CustomSelect = ({
   onChange,
   placeholder,
 }: SelectProps) => {
+  
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
-    console.log("N", name, "V", value);
     onChange(name, value);
   };
   return (
