@@ -3,28 +3,7 @@ import EmployeeForm, { FormProps } from "./tabs/EmployeeFormTab";
 import EmployeeList from "./tabs/EmployeeListTab";
 import EmployeeDetails from "./tabs/EmpDetailTab";
 import TabButton from "./components/TabButton";
-
-const parentStyle = {
-  // display: "flex",
-  justifyContent: "center",
-  // alignItems: "center",
-  minHeight: "100vh",
-  width: "60%" /* Container width (100% - 10% - 10%) */,
-  maxWidth:
-    "60vw" /* Ensure the container does not exceed 80% of the viewport width */,
-  margin: "16px auto 16px" /* Center horizontally */,
-  border: "2px solid gray",
-};
-const headerSectionStyle = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
-const headerShadow = {
-  color: "white",
-  textShadow: "1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue",
-  marginTop: "24px",
-};
+import "./AppContainer.css";
 
 const AppContainer = () => {
   const [details, setDetails] = useState<FormProps[]>([]);
@@ -49,54 +28,37 @@ const AppContainer = () => {
   };
 
   const handleEditButton = () => {
-    console.log("---");
     setEditData((prev) => !prev);
   };
   return (
-    <div
-      style={{
-        ...parentStyle,
-        flexDirection: "column",
-        boxShadow: "8px 2px 8px #818a8d",
-      }}
-    >
+    <main className="app-container">
       {/* Header Section */}
-      <header style={headerSectionStyle}>
-        <h3 style={headerShadow}>User Interface Functionality In React</h3>
+      <header className="app-container-item-header">
+        <h3>User Interface Functionality In React</h3>
       </header>
       {/* Tab Section */}
-      <section
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          marginTop: "3rem",
-          left: "10%",
-        }}
-      >
+      <section className="app-container-item-tab">
         <TabButton
           isActive={tab === "empForm"}
           onClick={() => handleTab("empForm")}
-          style={{ margin: "8px" }}
         >
           Form
         </TabButton>
         <TabButton
           isActive={tab === "empList"}
           onClick={() => handleTab("empList")}
-          style={{ margin: "8px" }}
         >
           Emp List
         </TabButton>
         <TabButton
           isActive={tab === "empDtl"}
           onClick={() => handleTab("empDtl")}
-          style={{ margin: "8px" }}
         >
           Emp Details
         </TabButton>
       </section>
-      {/* Details */}
-      <article>
+      {/* Details of tab section*/}
+      <section className="app-container-item-details">
         {tab === "empForm" && (
           <EmployeeForm
             setDetails={setDetails}
@@ -117,29 +79,8 @@ const AppContainer = () => {
             handleEditButton={handleEditButton}
           />
         )}
-      </article>
-    </div>
+      </section>
+    </main>
   );
 };
 export default AppContainer;
-/*
-----One Way for CENTER_A_DIV -------------
-className{
-position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
------SECOND WAY-----------
-{
-    display: block;
-    margin: 0 auto;
-}
-----THIRD WAY GRID--------
-{
- display: grid;
-  place-items: center; 
-  min-height: 100vh;  
-  width: 100vw;
-}
-*/

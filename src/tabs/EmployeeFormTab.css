@@ -1,0 +1,14 @@
+.employee-form-cont{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px solid;
+    width: 80%;
+    margin: 16px auto 16px
+}
+.employee-form-cont-header{
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    text-align: center;
+}

@@ -6,11 +6,34 @@
   }
   
   /* Set up the html and body to take full height */
-  html, body {
+  /* TYPE I-: using flex */
+  /* html, body {
+    margin:0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
+  } */
+   /* TYPE II -: Using Grid  */
+  html, body {
+    margin:0;
+    padding: 0;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    font-family: Arial, sans-serif;
+    background-color: black;
   }
+  @media screen and (max-width: 700px) {
+    html,body {
+      background-color: lightgreen;
+    }
+  }
+  
+
 
   
   

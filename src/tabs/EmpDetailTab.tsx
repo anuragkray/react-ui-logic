@@ -15,6 +15,7 @@ const nameWithSkill = [
   { value: "bknd", steam: "BKND", skill: ["Java", "Python", "Golang"] },
   { value: "dtbs", steam: "DTBS", skill: ["Sql", "Mono DB", "Maria DB"] },
 ];
+
 const EmployeeDetails = ({
   viewData,
   handleDelete,

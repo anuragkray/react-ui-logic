@@ -1,0 +1,15 @@
+.select-container{
+    display: flex;
+    margin: 4px;
+    flex-direction: row;
+    column-gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.select-container-item1{
+    flex-basis:30%
+}
+.select-container-item2{
+    width: 55%;
+    flex-shrink: 40%;
+}

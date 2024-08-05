@@ -1,14 +1,21 @@
 import CustomInput from "../components/CustomInput";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
+import CustomSelect from "../components/CustomSelect";
+import "./EmployeeFormTab.css";
+import { EMP_SKILL } from "../mock-api/data";
 
 export interface FormProps {
   empID: string;
   firstName: string;
   lastName: string;
+  email: string;
   secNum: string;
   yoe: string;
   age: string;
   location: string;
+  devlpmnt: string;
+  experties: string;
+  fnctnlity: string;
 }
 [];
 
@@ -22,11 +29,16 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
     empID: "",
     firstName: "",
     lastName: "",
+    email: "",
     secNum: "",
     yoe: "",
     age: "",
     location: "",
+    devlpmnt: "",
+    experties: "",
+    fnctnlity: "",
   });
+  const [expertiesData, setExpertiesData] = useState<any>({});
 
   useEffect(() => {
     if (editData && editAction) {
@@ -34,12 +46,38 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
     }
   }, [editData, editAction]);
 
-  const handlFormData = (name: string, value: string) => {
+  const handlFormData = useCallback((name: string, value: string) => {
     setFormData((preData) => ({
       ...preData,
       [name]: value,
     }));
-  };
+  }, []);
+
+  // Effect to update expertiesData when devlpmnt changes
+  useEffect(() => {
+    const findSkill = EMP_SKILL.find(
+      (element) => element.steam === formData.devlpmnt
+    );
+    setExpertiesData(findSkill);
+  }, [formData.devlpmnt]);
+
+  // Calculate developmentList
+  const developmentList = useMemo(() => {
+    return EMP_SKILL.map((element) => element.steam);
+  }, []);
+
+  // Calculate expertiesList based on the selected development
+  const expertiesList = useMemo(() => {
+    return expertiesData?.skill?.map((element: any) => element.name) || [];
+  }, [expertiesData]);
+
+  // Calculate functionalityList based on the selected experties
+  const functionalityList = useMemo(() => {
+    const findFnctnality = expertiesData?.skill?.find(
+      (element: any) => element.name === formData.experties
+    );
+    return findFnctnality?.functionality || [];
+  }, [expertiesData, formData.experties]);
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -57,23 +95,20 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
       empID: "",
       firstName: "",
       lastName: "",
+      email: "",
       secNum: "",
       yoe: "",
       age: "",
       location: "",
+      devlpmnt: "",
+      experties: "",
+      fnctnlity: "",
     });
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        border: "1px solid",
-      }}
-    >
-      <h4 style={{ padding: "8px" }}>Employee Registration</h4>
+    <div className="employee-form-cont">
+      <h4 className="employee-form-cont-header">Employee Registration</h4>
       <CustomInput
         name={"firstName"}
         label="First Name"
@@ -88,41 +123,20 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
         onChange={handlFormData}
         type={"text"}
       />
-      <div style={{ position: "relative", width: "250px" }}>
-        <label style={{ marginLeft: "14px" }}>Secret number</label>
-        <input
-          name={"secNum"}
-          value={formData.secNum}
-          onChange={(event) =>
-            handlFormData(event.target.name, event.target.value)
-          }
-          style={{
-            width: "70%",
-            boxSizing: "border-box",
-            border: "1px solid #ccc",
-            height: "20px",
-            fontSize: "14px",
-            padding: " 5px 20px",
-            marginLeft: "14px",
-          }}
-          type={"text"}
-        />
-        <button
-          style={{
-            position: "absolute",
-            top: "70%",
-            right: "1px" /* Adjust position as needed */,
-            transform: "translateY(-50%)",
-            backgroundColor: " #fff",
-            border: "none",
-            cursor: "pointer",
-            padding: " 5px 10px",
-            fontSize: "12px",
-          }}
-        >
-          {editAction ? "show" : "hide"}
-        </button>
-      </div>
+      <CustomInput
+        name={"email"}
+        label="Email"
+        value={formData.email}
+        onChange={handlFormData}
+        type={"email"}
+      />
+      <CustomInput
+        name={"secNum"}
+        label="Secret number"
+        value={formData.secNum}
+        onChange={handlFormData}
+        type={"number"}
+      />
       <CustomInput
         name={"empID"}
         label="Employee ID"
@@ -151,6 +165,30 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
         value={formData.location}
         onChange={handlFormData}
         type={"text"}
+      />
+      <CustomSelect
+        name="devlpmnt"
+        labelName="Eng Dev"
+        placeholder="Select Eng..."
+        value={formData.devlpmnt}
+        onChange={handlFormData}
+        list={developmentList}
+      />
+      <CustomSelect
+        name="experties"
+        labelName="Experties In"
+        placeholder="Select Str..."
+        value={formData.experties}
+        onChange={handlFormData}
+        list={expertiesList}
+      />
+      <CustomSelect
+        name="fnctnlity"
+        labelName="Funationality"
+        placeholder="Select Str..."
+        value={formData.fnctnlity}
+        onChange={handlFormData}
+        list={functionalityList}
       />
       <button
         onClick={handleSubmit}

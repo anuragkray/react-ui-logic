@@ -1,3 +1,4 @@
+import "./CustomInput.css";
 interface CustomInputProps {
   name: string;
   label: string;
@@ -19,18 +20,11 @@ const CustomInput = ({
     onChange(name, value);
   };
   return (
-    <div
-      style={{
-        display: "flex",
-        margin: "12px",
-        flexBasis: "50%",
-        flexDirection: "column",
-      }}
-    >
-      <div>
+    <div className="input-container">
+      <div className="input-container-item1">
         <label htmlFor={name}>{label}</label>
       </div>
-      <div>
+      <div className="input-container-item2">
         <input
           name={name}
           type={type}
