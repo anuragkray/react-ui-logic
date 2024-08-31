@@ -7,9 +7,9 @@
 }
 
 .select-container-item1{
-    flex-basis:30%
+    flex: 1 10 1px
 }
 .select-container-item2{
-    width: 55%;
-    flex-shrink: 40%;
+    
+    flex: 1 10 80px
 }

@@ -1,22 +1,25 @@
-import React, { useState } from "react";
 import RadioBox from "./RadioBox";
 import { CustomRadioButon } from "./CustomRadioButon";
 
 interface RadioButtonGroupProps {
   name: string;
+  value: string;
   className?: string;
   options: { value: string; label: string }[];
+  onChange: (name: string, value: string) => void;
 }
 
 const RadioButtonGroup = ({
   name,
   options,
+  value,
   className,
+  onChange,
 }: RadioButtonGroupProps) => {
-  const [selectedValue, setSelectedValue] = useState<string>("");
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(event.target.value);
+    const { name, value } = event.target;
+    console.log("NAME", name, value);
+    onChange(name, value);
   };
 
   return (
@@ -27,7 +30,7 @@ const RadioButtonGroup = ({
           id={option.value}
           name={name}
           value={option.value}
-          checked={selectedValue === option.value}
+          checked={option.value === value}
           onChange={handleChange}
           labelName={option.label}
         />

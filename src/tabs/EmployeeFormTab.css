@@ -3,9 +3,11 @@
     justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
-    border: 1px solid;
+    border: 2px dotted gray;
     width: 80%;
-    margin: 16px auto 16px
+    margin: 16px auto 16px;
+    filter: drop-shadow(2px 2px 10px);
+    box-shadow: 1px 2px 8px #818a8d;
 }
 .employee-form-cont-header{
     margin-top: 2rem;
@@ -15,4 +17,7 @@
 .gender-radio{
     width: 80%;
     margin-left: 1rem;
+}
+.form-check-box{
+    margin: 1rem;
 }

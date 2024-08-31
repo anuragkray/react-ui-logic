@@ -4,6 +4,8 @@ import CustomSelect from "../components/custom-select/CustomSelect";
 import "./EmployeeFormTab.css";
 import { EMP_SKILL } from "../mock-api/data";
 import RadioButtonGroup from "../components/custom-radio-button/RadioButtonGroup";
+import { GENDER } from "../utils/constant/const";
+import CustomCheckBox from "../components/custom-check-box/CustomCheckBox";
 
 export interface FormProps {
   empID: string;
@@ -11,6 +13,8 @@ export interface FormProps {
   lastName: string;
   email: string;
   phNum: string;
+  gndr: string;
+  exprtLevl: boolean;
   yoe: string;
   age: string;
   location: string;
@@ -32,6 +36,8 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
     lastName: "",
     email: "",
     phNum: "",
+    gndr: "",
+    exprtLevl: false,
     yoe: "",
     age: "",
     location: "",
@@ -47,7 +53,7 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
     }
   }, [editData, editAction]);
 
-  const handlFormData = useCallback((name: string, value: string) => {
+  const handlFormData = useCallback((name: string, value: string | boolean) => {
     setFormData((preData) => ({
       ...preData,
       [name]: value,
@@ -99,6 +105,8 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
       email: "",
       phNum: "",
       yoe: "",
+      gndr: "",
+      exprtLevl: false,
       age: "",
       location: "",
       devlpmnt: "",
@@ -148,11 +156,26 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
       />
       <RadioButtonGroup
         className="gender-radio"
-        name="gender"
-        options={[
-          { label: "Male", value: "m" },
-          { label: "Female", value: "f" },
-        ]}
+        name="gndr"
+        value={formData.gndr}
+        onChange={handlFormData}
+        options={GENDER}
+      />
+      <CustomCheckBox
+        id="exprtLevl"
+        name="exprtLevl"
+        checked={formData.exprtLevl || false}
+        onChange={handlFormData}
+        labelName="Expert"
+        className={"form-check-box"}
+      />
+      <CustomCheckBox
+        id="exprtLevl"
+        name="exprtLevl"
+        checked={formData.exprtLevl || false}
+        onChange={handlFormData}
+        labelName="Expert"
+        className={"form-check-box"}
       />
       <CustomInput
         name={"yoe"}
@@ -202,7 +225,12 @@ const EmployeeForm = ({ setDetails, editData, editAction }: ChildProps) => {
 
       <button
         onClick={handleSubmit}
-        style={{ backgroundColor: "blue", padding: "8px", marginBottom: "8px" }}
+        style={{
+          backgroundColor: "blue",
+          padding: "8px",
+          marginBottom: "8px",
+          marginTop: "12px",
+        }}
       >
         Submit
       </button>

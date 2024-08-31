@@ -7,8 +7,9 @@
 }
 
 .input-container-item1{
-    flex-basis:35%
+    flex: 1 0 100px
 }
+/* GBS-> flex-grow flex-basic flex-shrink */
 .input-container-item2{
-    flex-basis:40%
+    flex: 1 0 10%
 }
